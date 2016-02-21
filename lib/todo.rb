@@ -1,29 +1,31 @@
 class TodoItem
   include Listable
+
   attr_reader :description, :due, :priority
+  @@todoitemslist = []
 
   def initialize(description, options={})
     @description = description
     @due = options[:due] ? Date.parse(options[:due]) : options[:due]
     @priority = options[:priority]
+    add_to_todo_list
   end
 
-  def format_date
-    @due ? @due.strftime("%D") : "No due date"
-  end
-
-  def format_priority
-    value = " ⇧" if @priority == "high"
-    value = " ⇨" if @priority == "medium"
-    value = " ⇩" if @priority == "low"
-    value = "" if !@priority
-    return value
+  def self.all
+    @@todoitemslist
   end
 
   def details
-    format_description(@description) + "due: " +
-    format_date +
-    format_priority
+    format_description(@description) +
+    "due: " +
+    format_date("todo",@due) +
+    format_priority(@priority)
+  end
+
+  private
+
+  def add_to_todo_list
+    @@todoitemslist << self
   end
 
 end
