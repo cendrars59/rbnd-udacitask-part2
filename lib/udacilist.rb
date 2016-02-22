@@ -8,16 +8,18 @@ class UdaciList
     @items = []
   end
 
-  def items_list_count
-    return 1
+  def items_list_count_below_the_limit?
+    @items.length < @max_items_number || @items.empty?
   end
 
-  def add(type, description,items_list_count,options={})
-    #if items_list_count < @max_items_number
+  def add(type, description,options={})
+    #if items_list_count_below_the_limit?
       type = type.downcase
       @items.push TodoItem.new(description, options) if type == "todo"
       @items.push EventItem.new(description, options) if type == "event"
       @items.push LinkItem.new(description, options) if type == "link"
+    #else
+      #raise IndexExceedsListSize, "impossible to add more than #{@max_items_number} items"
     #end
   end
 
