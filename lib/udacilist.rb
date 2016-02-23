@@ -1,38 +1,48 @@
 class UdaciList
-  attr_reader :title, :items,:max_items_number
-
-  @max_items_number = 10
+  attr_reader :title, :items
+  @@authorized_listable_type =["todo","event","link"]
 
   def initialize(options={})
-    @title = options[:title]
+    @title = options[:title] || "Untitled List"
     @items = []
   end
 
-  def items_list_count_below_the_limit?
-    @items.length < @max_items_number || @items.empty?
+  def add(type,description,options={})
+    type = type.downcase
+      @items.push TodoItem.new(description,options) if type == "todo"
+      @items.push EventItem.new(description,options) if type == "event"
+      @items.push LinkItem.new(description,options) if type == "link"
+      fail UdaciListErrors::InvalidItemType, "#{type} type doesn't exist".red if !@@authorized_listable_type.include?(type)
   end
 
-  def add(type, description,options={})
-    #if items_list_count_below_the_limit?
-      type = type.downcase
-      @items.push TodoItem.new(description, options) if type == "todo"
-      @items.push EventItem.new(description, options) if type == "event"
-      @items.push LinkItem.new(description, options) if type == "link"
-    #else
-      #raise IndexExceedsListSize, "impossible to add more than #{@max_items_number} items"
-    #end
+  def item_index_exists?(index)
+    index < @items.length
   end
 
   def delete(index)
-    @items.delete_at(index - 1)
+    if item_index_exists?(index)
+      @items.delete_at(index - 1)
+    else
+      fail UdaciListErrors::IndexExceedsListSize, "#{index} : the selected item doesn't exist".red
+    end
+  end
+
+  def select_by_filter(filter)
+    @items.select{|item| item.type == filter}
+  end
+
+  def filter(filter)
+    select_by_filter(filter).each do |item|
+        puts "#{item.details}"
+    end
   end
 
   def all
-    puts "-" * @title.length
+    puts "-".magenta * @title.length
     puts @title.magenta
-    puts "-" * @title.length
+    puts "-".magenta * @title.length
     @items.each_with_index do |item, position|
-      puts "#{position + 1}) #{item.details}"
+      puts "#{(position + 1)} #{item.details}"
     end
   end
 

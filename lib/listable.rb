@@ -1,6 +1,10 @@
 
 module Listable
 
+  #attr_reader :type
+  @@authorized_listable_priority =["high","medium","low",nil]
+  #@type
+
 
   def format_description(description)
     "#{description}".ljust(30)
@@ -18,11 +22,15 @@ module Listable
   end
 
   def format_priority(priority)
-    value = " ⇧".green if priority == "high"
-    value = " ⇨".blue if priority == "medium"
-    value = " ⇩".red if priority == "low"
-    value = "" if !priority
-    return value
+    if @@authorized_listable_priority.include?(priority)
+      value = " ⇧".green if priority == "high"
+      value = " ⇨".blue if priority == "medium"
+      value = " ⇩".red if priority == "low"
+      value = "" if !priority
+      return value
+    else
+      fail UdaciListErrors::InvalidPriorityValue, "#{priority} : is not accepted".red
+    end
   end
 
   def format_name(site_name)
@@ -30,9 +38,8 @@ module Listable
   end
 
   private
-
   def todo_format_date(due)
-    due ? due.strftime('%D') : 'No due date'
+    due ? due.strftime('%D') : 'No due date '
   end
 
 end
