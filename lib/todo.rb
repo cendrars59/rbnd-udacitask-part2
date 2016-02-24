@@ -15,12 +15,10 @@ class TodoItem
   end
 
   def details
-    format_description(@description).magenta +
-    "due: " +
-    format_date("todo",@due) +
-    format_priority(@priority)+
-    "type is :   "
-    end
+    common_details(@type,@description)+
+    "Priority:".green+format_priority(@priority)+
+    "Due:".green+format_date("todo",@due)
+  end
 
 
 end

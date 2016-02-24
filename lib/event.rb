@@ -10,10 +10,8 @@ class EventItem
   end
 
   def details
-    format_description(@description) +
-    "event dates: "+
-    event_format_date(@start_date,@end_date)+
-    "type is :   " + @type
+    common_details(@type,@description)+
+    "Dates:"+ event_format_date(@start_date,@end_date)
   end
 
   def type

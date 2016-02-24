@@ -7,11 +7,20 @@ module Listable
 
 
   def format_description(description)
-    "#{description}".ljust(30)
+    "#{description}".ljust(30).magenta
   end
 
   def format_date(type,due)
     todo_format_date(due) if type =="todo"
+  end
+
+  def format_type(type)
+    type.ljust(8)
+  end
+
+  def common_details(type,description)
+    format_description(description)+
+    "Type:".green+format_type(type)+
   end
 
   def event_format_date(start_date, end_date)
@@ -26,8 +35,8 @@ module Listable
       value = " ⇧".green if priority == "high"
       value = " ⇨".blue if priority == "medium"
       value = " ⇩".red if priority == "low"
-      value = "" if !priority
-      return value
+      value = "  " if !priority
+      return value.ljust(5)
     else
       fail UdaciListErrors::InvalidPriorityValue, "#{priority} : is not accepted".red
     end

@@ -30,20 +30,38 @@ class UdaciList
   def select_by_filter(filter)
     @items.select{|item| item.type == filter}
   end
+  
+  # Old version of the method all to display the item list
+  #def all
+  #  puts "-".magenta * @title.length
+  #  puts @title.magenta
+  #  puts "-".magenta * @title.length
+  #  @items.each_with_index do |item, position|
+  #    puts "#{(position + 1)} #{item.details}"
+  #  end
+  # end
 
-  def filter(filter)
-    select_by_filter(filter).each do |item|
-        puts "#{item.details}"
-    end
+  def results_table
+    rows = []
+     rows << ["Order", "Details"]
+     rows << [" " ," "]
+     @items.each_with_index do |item, position|
+       rows << [position + 1,item.details]
+     end
+     table = Terminal::Table.new :title => @title.magenta, :rows => rows
+     puts table
   end
 
-  def all
-    puts "-".magenta * @title.length
-    puts @title.magenta
-    puts "-".magenta * @title.length
-    @items.each_with_index do |item, position|
-      puts "#{(position + 1)} #{item.details}"
-    end
+  def results_table_with_filter(filter)
+    rows = []
+     rows << ["Order", "Details"]
+     rows << [" " ," "]
+     select_by_filter(filter).each_with_index do |item, position|
+       rows << [position + 1,item.details]
+     end
+     table = Terminal::Table.new :title => @title.magenta, :rows => rows
+     puts table
   end
+
 
 end
