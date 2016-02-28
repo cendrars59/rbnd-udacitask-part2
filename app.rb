@@ -44,4 +44,4 @@ new_list.results_table
 
 # DEMO FILTER BY ITEM TYPE
 # ------------------------
-new_list.results_table_with_filter("event")
+new_list.results_table filter: "event"

@@ -20,5 +20,4 @@ class TodoItem
     "Due:".green+format_date("todo",@due)
   end
 
-
 end
