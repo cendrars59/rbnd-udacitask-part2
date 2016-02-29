@@ -41,6 +41,8 @@ class UdaciList
     end
     table = Terminal::Table.new :title => @title.magenta, :rows => rows
     puts table
+    # Generate a record file
+    
   end
 
 end

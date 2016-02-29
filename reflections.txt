@@ -1,13 +1,35 @@
 # What you added to Udacitask 2.0
 # -------------------------------------------------------
 1. What is the gem of your choice and how did you use it?
+
+Added gem 'terminal-table'
+In order to display the list of items into a table
+
 2. Describe the 2 features you added to the project.
-  a) Feature 1...
+  a) Feature 1 Display the result in a list
+  The table has a title
+  Each column has a title
+
   b) Feature 2...
 
 # REFLECTIONS
 # -------------------------------------------------------
 1. How long did you spend working on this project?
+  12 hours cumulated
+
 2. What was the most rewarding challenge you conquered?
+Being able to understand and modify the existing code in order to implement the new features
+and create the modules.
+
 3. What two additional features did you build? Why?
+
+  a) Feature 1 Display the result in a list
+    why for a better user experience with a clearer display
+
+  b) Feature 2...
+
+
+
 4. Where do you still have room to grow?
+In the application software designing stage, understanding when it is better to use module or superclass.
+I haven't gotten the trick :-)
