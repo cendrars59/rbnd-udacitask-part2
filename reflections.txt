@@ -11,6 +11,7 @@ In order to display the list of items into a table
   Each column has a title
 
   b) Feature 2...
+  let the user chooses the value of the filter to display the list
 
 # REFLECTIONS
 # -------------------------------------------------------
@@ -27,7 +28,7 @@ and create the modules.
     why for a better user experience with a clearer display
 
   b) Feature 2...
-
+  let the user chooses the value of the filter to display the list 
 
 
 4. Where do you still have room to grow?

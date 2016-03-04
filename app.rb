@@ -2,12 +2,14 @@ require 'chronic'
 require 'colorize'
 require 'terminal-table'
 require 'date'
+require 'highline'
 require_relative "lib/listable"
 require_relative "lib/errors"
 require_relative "lib/udacilist"
 require_relative "lib/todo"
 require_relative "lib/event"
 require_relative "lib/link"
+
 
 list = UdaciList.new(title: "Julia's Stuff")
 list.add("todo", "Buy more cat food", due: "2016-02-03", priority: "low")
@@ -44,4 +46,11 @@ new_list.results_table
 
 # DEMO FILTER BY ITEM TYPE
 # ------------------------
-new_list.results_table filter: "event"
+
+# Feature 2 let the user define the filter value
+puts "select one item type to filter the list"
+puts "event or todo or link"
+cli = HighLine.new
+selected_filter = cli.ask "What is your choice?"
+
+new_list.results_table filter: selected_filter

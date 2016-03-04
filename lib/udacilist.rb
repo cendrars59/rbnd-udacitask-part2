@@ -1,10 +1,14 @@
 class UdaciList
-  attr_reader :title, :items
+  attr_reader :title, :items, :email
+  attr_accessor :report
+
   @@authorized_listable_type =["todo","event","link"]
 
   def initialize(options={})
     @title = options[:title] || "Untitled List"
     @items = []
+    # Feature 2 : defining a default address to send the email address
+    @email = "owner_email@domain.com"
   end
 
   def add(type,description,options={})
@@ -41,8 +45,9 @@ class UdaciList
     end
     table = Terminal::Table.new :title => @title.magenta, :rows => rows
     puts table
-    # Generate a record file
-    
+    # Generate a mail
   end
+
+  
 
 end
